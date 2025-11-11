@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The PRP Times — Online Edition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1 class="title-text">The PRP Times</h1>
+    <p class="tagline">“Truth behind bars” — Weekly prison life stories</p>
+  </header>
+
+  <section class="reader">
+    <div id="book">
+      <div class="page" data-issue="001" data-title="Issue 001" data-subtitle="Edition Placeholder">
+        <iframe src="pages/issue-001/index.html" frameborder="0"></iframe>
+      </div>
+      <div class="page" data-issue="002" data-title="Issue 002" data-subtitle="Edition Placeholder">
+        <iframe src="pages/issue-002/index.html" frameborder="0"></iframe>
+      </div>
+      <div class="page" data-issue="003" data-title="Issue 003" data-subtitle="Edition Placeholder">
+        <iframe src="pages/issue-003/index.html" frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prev" aria-label="Previous issue">⟵ Prev</button>
+      <span id="page-indicator" class="page-indicator" aria-live="polite"></span>
+      <span id="page-meta" class="page-meta" aria-live="polite"></span>
+      <button id="next" aria-label="Next issue">Next ⟶</button>
+    </div>
+
+    <p class="reader-hint" id="reader-hint">Tip: Use ← / → keys or swipe to flip issues.</p>
+
+    <div class="issue-nav" id="issue-nav" aria-label="Issue thumbnails"></div>
+  </section>
+
+  <footer>
+    <p>© 2025 The PRP Times — All rights reserved</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

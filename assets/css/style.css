@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display+SC:wght@400;700&family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap');
+
+body {
+  margin: 0;
+  background: #0d0d0d url('../img/bg-paper.jpg') center/cover no-repeat fixed;
+  color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.title-text {
+  font-family: 'Cinzel', 'Playfair Display SC', serif;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  display: inline-block;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  margin: 0.4rem 0 0.2rem;
+}
+
+.tagline {
+  font-style: italic;
+  opacity: 0.75;
+  letter-spacing: 0.08em;
+}
+
+.reader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto 3.5rem;
+  width: min(92vw, 1100px);
+}
+
+#book {
+  width: 100%;
+  height: clamp(500px, 75vh, 880px);
+  position: relative;
+  perspective: 2000px;
+  overflow: visible;
+  border-radius: 12px;
+  touch-action: pan-y;
+}
+
+#book::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 60%);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  background: #f8f4ec url('../img/bg-paper.jpg') center/cover;
+  transform-origin: left center;
+  transition: transform 0.7s ease-in-out, box-shadow 0.4s ease, opacity 0.4s ease;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.page iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.page.is-active {
+  transform: rotateY(0deg);
+  pointer-events: auto;
+}
+
+.page.is-before {
+  transform: rotateY(-180deg);
+  box-shadow: none;
+}
+
+.page.is-after {
+  transform: translateX(4px);
+  opacity: 0.2;
+}
+
+.page.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.05), rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  z-index: 2;
+}
+
+.page.is-loading iframe {
+  opacity: 0;
+}
+
+.controls {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  background: linear-gradient(135deg, #222, #111);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #444, #222);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-family: 'Playfair Display SC', serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.page-meta {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.reader-hint {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.reader-hint.hidden {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.issue-nav {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.issue-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  min-width: 150px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  text-align: left;
+}
+
+.issue-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.issue-card.is-active {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.issue-card-title {
+  font-family: 'Playfair Display SC', serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  display: block;
+}
+
+.issue-card-subtitle {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  #book {
+    height: clamp(420px, 80vh, 760px);
+  }
+
+  .reader {
+    margin: 1.5rem 1rem 2.5rem;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .page-indicator,
+  .page-meta {
+    letter-spacing: 0.1em;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
